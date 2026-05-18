@@ -11,6 +11,7 @@ Confidence threshold: if regex confidence >= 0.85, skip model call.
 import re
 import json
 import logging
+import os
 from dataclasses import dataclass, asdict
 from typing import Optional
 
@@ -264,7 +265,7 @@ def regex_parse(text: str) -> ParseResult:
 # Model Layer (Qwen2.5-0.5B via llama-cpp-python)
 # ---------------------------------------------------------------------------
 
-MODEL_PATH = "/srv/repi-parser/models/qwen2.5-0.5b-instruct-q4_k_m.gguf"
+MODEL_PATH = os.environ.get("MODEL_PATH", "/app/models/qwen2.5-0.5b-instruct-q4_k_m.gguf")
 
 FEW_SHOT_EXAMPLES = """Parse Vietnamese/English cooking instructions. Return ONLY valid JSON with these optional fields:
 appliance (oven|stovetop|airfryer|mixer|blender|instant_pot|steamer|microwave|rice_cooker|grill),
